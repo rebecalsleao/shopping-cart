@@ -1,12 +1,14 @@
 const fetchProducts = async (product) => {
-  if (product === null) {
-    throw new Error('You must provide an url');
+  if (product === undefined) {
+    return new Error('You must provide an url');
   }
   const response = await fetch(`https://api.mercadolibre.com/sites/MLB/search?q=${product}`);
   const result = await response.json();
   return result;
 };
 
-module.exports = {
-  fetchProducts,
-};
+if (typeof module !== 'undefined') {
+  module.exports = {
+    fetchProducts,
+  };
+}
