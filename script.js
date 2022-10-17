@@ -76,14 +76,14 @@ window.onload = () => {
   const getProducts = fetchProducts('computador');
   getProducts.then((value) => {
     console.log(value);
+    value.results.forEach((item) => {
+      const result = createProductItemElement({
+        id: item.id,
+        title: item.title,
+        thumbnail: item.thumbnail,
+      });
+      const getSectionTag = document.getElementsByClassName('items');
+      getSectionTag[0].appendChild(result);
+    });
   });
-
-  // search.computadorSearch.results.forEach((item) => {
-  //   const createItemId = createProductItemElement(id);
-  //   const createItemTitle = createProductItemElement(title);
-  //   const createItemThumbnail = createProductItemElement(thumbnail);
-  // });
-  // chamar nossa função de fetchProd
-  // foreach em cada um dos elementros do resultado
-  // chamar a função createProductItemElement() para cada um dos elementos do resultado
 };
