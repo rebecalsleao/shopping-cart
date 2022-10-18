@@ -29,10 +29,26 @@ const createCustomElement = (element, className, innerText) => {
   return e;
 };
 
+/**
+ * Função responsável por criar e retornar um item do carrinho.
+ * @param {Object} product - Objeto do produto.
+ * @param {string} product.id - ID do produto.
+ * @param {string} product.title - Título do produto.
+ * @param {string} product.price - Preço do produto.
+ * @returns {Element} Elemento de um item do carrinho.
+ */
+const createCartItemElement = ({ id, title, price }) => {
+  const li = document.createElement('li');
+  li.className = 'cart__item';
+  li.innerText = `ID: ${id} | TITLE: ${title} | PRICE: $${price}`;
+  // li.addEventListener('click', cartItemClickListener);
+  return li;
+};
+
 function onClickAddItemCart(id) {
   const productInfo = productsValue.results.find((product) => id === product.id);
   const itemElementSon = createCartItemElement({
-    id: id,
+    id: product.id,
     title: productInfo.title,
     price: productInfo.price,
   });
@@ -71,22 +87,6 @@ const createProductItemElement = ({ id, title, thumbnail }) => {
  * @returns {string} ID do produto.
  */
 const getIdFromProductItem = (product) => product.querySelector('span.id').innerText;
-
-/**
- * Função responsável por criar e retornar um item do carrinho.
- * @param {Object} product - Objeto do produto.
- * @param {string} product.id - ID do produto.
- * @param {string} product.title - Título do produto.
- * @param {string} product.price - Preço do produto.
- * @returns {Element} Elemento de um item do carrinho.
- */
-const createCartItemElement = ({ id, title, price }) => {
-  const li = document.createElement('li');
-  li.className = 'cart__item';
-  li.innerText = `ID: ${id} | TITLE: ${title} | PRICE: $${price}`;
-  // li.addEventListener('click', cartItemClickListener);
-  return li;
-};
 
 function loadProducts() {
   const getProducts = fetchProducts('computador');
