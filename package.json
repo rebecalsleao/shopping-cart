@@ -27,7 +27,7 @@
   "engines": {
     "node": "16"
   },
-  "type": "module",
+  // "type": "module",
   "devDependencies": {
     "cypress": "10.6.0",
     "cypress-multi-reporters": "1.6.1",
