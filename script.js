@@ -39,6 +39,7 @@ function sumValues() {
     sumPrice += price;
   }
   totalPrice.innerHTML = Math.round(sumPrice);
+  saveCartItems(itemsCart);
 }
 
 function onClickRemoveItem(id) {
