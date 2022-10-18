@@ -2,7 +2,7 @@
 // experimente passar o mouse sobre o nome das funções e verá que elas possuem descrições!
 
 // Fique a vontade para modificar o código já escrito e criar suas próprias funções!
-
+let productsValue = {};
 /**
  * Função responsável por criar e retornar o elemento de imagem do produto.
  * @param {string} imageSource - URL da imagem.
@@ -29,6 +29,17 @@ const createCustomElement = (element, className, innerText) => {
   return e;
 };
 
+function onClickAddItemCart(id) {
+  const productInfo = productsValue.results.find((product) => id === product.id);
+  const itemElementSon = createCartItemElement({
+    id: id,
+    title: productInfo.title,
+    price: productInfo.price,
+  });
+  const creatProductHtml = document.getElementsByClassName('cart__items');
+  creatProductHtml[0].appendChild(itemElementSon);
+}
+
 /**
  * Função responsável por criar e retornar o elemento do produto.
  * @param {Object} product - Objeto do produto.
@@ -44,7 +55,12 @@ const createProductItemElement = ({ id, title, thumbnail }) => {
   section.appendChild(createCustomElement('span', 'item_id', id));
   section.appendChild(createCustomElement('span', 'item__title', title));
   section.appendChild(createProductImageElement(thumbnail));
-  section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!'));
+  const buttom = createCustomElement('button', 'item__add', 'Adicionar ao carrinho!');
+  buttom.addEventListener('click', () => {
+    onClickAddItemCart(id);
+  });
+  // section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!'));
+  section.appendChild(buttom);
 
   return section;
 };
@@ -68,14 +84,14 @@ const createCartItemElement = ({ id, title, price }) => {
   const li = document.createElement('li');
   li.className = 'cart__item';
   li.innerText = `ID: ${id} | TITLE: ${title} | PRICE: $${price}`;
-  li.addEventListener('click', cartItemClickListener);
+  // li.addEventListener('click', cartItemClickListener);
   return li;
 };
 
-window.onload = () => {
+function loadProducts() {
   const getProducts = fetchProducts('computador');
   getProducts.then((value) => {
-    console.log(value);
+    productsValue = value;
     value.results.forEach((item) => {
       const result = createProductItemElement({
         id: item.id,
@@ -86,4 +102,8 @@ window.onload = () => {
       getSectionTag[0].appendChild(result);
     });
   });
+}
+
+window.onload = () => {
+  loadProducts();
 };
