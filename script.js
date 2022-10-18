@@ -118,6 +118,18 @@ function loadProducts() {
   });
 }
 
+function onClickCleanCart() {
+  const buttom = document.querySelector('.empty-cart');
+  buttom.addEventListener('click', () => {
+    const allLi = document.querySelectorAll('.cart__item');
+    for (let index = 0; index < allLi.length; index += 1) {
+      const element = allLi[index];
+      element.remove();
+    }
+  });
+}
+
 window.onload = () => {
   loadProducts();
+  onClickCleanCart();
 };
