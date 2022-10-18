@@ -29,6 +29,17 @@ const createCustomElement = (element, className, innerText) => {
   return e;
 };
 
+function onClickRemoveItem(id) {
+  const cartItems = document.getElementsByClassName('cart__item');
+  for (let index = 0; index < cartItems.length; index += 1) {
+    const element = cartItems[index];
+    console.log(element.textContent);
+    if (element.textContent.includes(id)) {
+      element.remove();
+    }
+  }
+}
+
 /**
  * Função responsável por criar e retornar um item do carrinho.
  * @param {Object} product - Objeto do produto.
@@ -41,14 +52,16 @@ const createCartItemElement = ({ id, title, price }) => {
   const li = document.createElement('li');
   li.className = 'cart__item';
   li.innerText = `ID: ${id} | TITLE: ${title} | PRICE: $${price}`;
-  // li.addEventListener('click', cartItemClickListener);
+  li.addEventListener('click', () => {
+    onClickRemoveItem(id);
+  });
   return li;
 };
 
 function onClickAddItemCart(id) {
   const productInfo = productsValue.results.find((product) => id === product.id);
   const itemElementSon = createCartItemElement({
-    id: product.id,
+    id: productInfo.id,
     title: productInfo.title,
     price: productInfo.price,
   });
