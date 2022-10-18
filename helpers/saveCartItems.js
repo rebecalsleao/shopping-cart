@@ -5,5 +5,3 @@ const saveCartItems = (myObj) => {
 if (typeof module !== 'undefined') {
   module.exports = saveCartItems;
 }
-
-// const recoveredObject = JSON.parse(localStorage.getItem('myData'));
