@@ -1,11 +1,6 @@
 const getSavedCartItems = () => {
   const item = localStorage.getItem('cartItems');
-  if (item === undefined) {
-    return null;
-  }
-
-  const recoveredObject = JSON.parse(item);
-  return recoveredObject;
+  return item;
 };
 
 if (typeof module !== 'undefined') {
