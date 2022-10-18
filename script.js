@@ -59,14 +59,15 @@ const createCartItemElement = ({ id, title, price }) => {
 };
 
 function onClickAddItemCart(id) {
-  const productInfo = productsValue.results.find((product) => id === product.id);
-  const itemElementSon = createCartItemElement({
-    id: productInfo.id,
-    title: productInfo.title,
-    price: productInfo.price,
+  fetchItem(id).then((product) => {
+    const itemElementSon = createCartItemElement({
+      id: product.id,
+      title: product.title,
+      price: product.price,
+    });
+    const creatProductHtml = document.getElementsByClassName('cart__items');
+    creatProductHtml[0].appendChild(itemElementSon);
   });
-  const creatProductHtml = document.getElementsByClassName('cart__items');
-  creatProductHtml[0].appendChild(itemElementSon);
 }
 
 /**
