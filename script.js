@@ -38,7 +38,7 @@ function sumValues() {
     const price = parseFloat(element.innerText.split('$')[1]);
     sumPrice += price;
   }
-  totalPrice.innerHTML = Math.round(sumPrice);
+  totalPrice.innerHTML = sumPrice;
   saveCartItems(itemsCart);
 }
 
